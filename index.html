@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loveflix - 2 Anos de Amor</title>
+    <style>
+        /* Configurações Globais (Estilo Dark / Cinema) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: #ffffff;
+            overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 20px 4%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            color: #E50914; /* Vermelho Netflix */
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #ff4d6d; /* Toque romântico */
+        }
+
+        /* Banner Principal (Destaque) */
+        .banner {
+            height: 70vh;
+            position: relative;
+            /* Substitua pela foto principal de vocês */
+            background: linear-gradient(to top, #141414 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.6) 100%), 
+                        url('imagens/imagem_capa.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 4% 40px 4%;
+        }
+
+        .banner-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .banner-title {
+            font-size: 48px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .banner-info {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #46d369; /* Verde de "99% relevante" */
+            font-weight: bold;
+        }
+
+        .banner-info span {
+            color: #aaa;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+
+        .banner-sinopse {
+            font-size: 16px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            margin-right: 10px;
+        }
+
+        .btn-play {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .btn-play:hover {
+            background-color: rgba(255,255,255,0.75);
+        }
+
+        .btn-like {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: #ffffff;
+        }
+
+        .btn-like:hover {
+            background-color: rgba(109, 109, 110, 0.4);
+        }
+
+        /* Fileiras de Filmes (Categorias) */
+        .row {
+            padding: 20px 4% 0 4%;
+        }
+
+        .row-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #e5e5e5;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: none; /* Esconde barra no Firefox */
+        }
+
+        .cards-container::-webkit-scrollbar {
+            display: none; /* Esconde barra no Chrome/Safari */
+        }
+
+        .card {
+            min-width: 240px;
+            width: 240px;
+            height: 135px; /* Proporção 16:9 de streaming */
+            background-color: #333;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            z-index: 5;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+            padding: 20px 10px 5px 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        /* Efeito de Chuva de Corações */
+        .heart {
+            position: fixed;
+            color: #ff4d6d;
+            font-size: 24px;
+            animation: floatUp 2s linear forwards;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">LOVE<span>FLIX</span></div>
+    </div>
+
+    <div class="banner">
+        <div class="banner-content">
+            <div class="banner-title">O Começo de Tudo</div>
+            <div class="banner-info">99% Relevante <span>2024</span> <span>2 Temporadas</span></div>
+            <div class="banner-sinopse">
+                Uma história real sobre dois corações que se cruzaram e decidiram trilhar o mesmo caminho. Cheia de sorrisos contidos, cumplicidade e um amor que cresce a cada dia. O melhor roteiro que o destino já escreveu.
+            </div>
+            <div>
+                <a href="#" class="btn btn-play" onclick="alert('Próximo capítulo: Continuar te amando para sempre meu trenzão!')">▶ Assistir</a>
+                <button class="btn btn-like" onclick="soltarCoracoes()">❤️ Amei</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row-title">Minhas Escolhas para Você</div>
+        <div class="cards-container">
+            <div class="card" onclick="alert('Legenda: Lembrança daquele dia incrível que rimos até a barriga doer.')">
+                <img src="C:\loveflix\imagens\20240531_115058_resized.jpg" alt="Momento 1">
+                <div class="card-title">Aquele Primeiro Sorriso</div>
+            </div>
+            <div class="card" onclick="alert('Legenda: Saber que vou estar contigo para o resto de nossas vidas me faz ser eternamente grato a Deus.')">
+                <img src="C:\loveflix\imagens\20241001_132736.jpg" alt="Momento 2">
+                <div class="card-title">O nosso lugar</div>
+            </div>
+            <div class="card" onclick="alert('Legenda: Onde o nosso mundo parou por alguns segundos.')">
+                <img src="C:\loveflix\imagens\IMG-20250523-WA0036.jpg" alt="Momento 2">
+                <div class="card-title">Melhor Encontro</div>
+            </div>
+            <div class="card" onclick="alert('Legenda: Te fazer bem e feliz é minha missão nessa terra.')">
+                <img src="C:\loveflix\imagens\20241228_122206-2.jpg" alt="Momento 2">
+                <div class="card-title">Te surpreendendo</div>
+            </div>
+            <div class="card" onclick="alert('Legenda: Companheira de todas as horas, até nos cliques distraídos.')">
+                <img src="C:\loveflix\imagens\20241002_152253.jpg" alt="Momento 3">
+                <div class="card-title">Do Jeitinho que Eu Amo</div>
+            </div>
+            <div class="card" onclick="alert('Legenda: É minha melhor companhia... e única!')">
+                <img src="C:\loveflix\imagens\IMG_20260102_210558_458.jpg" alt="Momento 3">
+                <div class="card-title">Minha musa</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row-title">Próximos Lançamentos (Em Breve)</div>
+        <div class="cards-container">
+            <div class="card" onclick="alert('Próxima Temporada: Novas fronteiras e um futuro brilhante esperando por nós!')">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=400" alt="Futuro 1">
+                <div class="card-title">A Próxima Grande Viagem</div>
+            </div>
+            <div class="card" onclick="alert('O roteiro continua sendo escrito com muito amor e conquistas juntos.')">
+                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=400" alt="Futuro 2">
+                <div class="card-title">Nossa Próxima Parada</div>
+            </div>
+            <div class="card" onclick="alert('Nossa história será escrita por sobre a história.')">
+                <img src="C:\loveflix\imagens\89.jpg">
+                <div class="card-title">Sonhos: temporada 1</div>
+            </div>
+            <div class="card" onclick="alert('Onde haja sol ou não, o seu coração é meu lar.')">
+                <img src="C:\loveflix\imagens\neve-no-chile.jpg">
+                <div class="card-title">Eu quero, tu quer</div>
+            </div>
+            <div class="card" onclick="alert('Quando Deus nos colocou em um só caminho, já sabia que seria amor sem fim.')">
+                <img src="C:\loveflix\imagens\neve-no-chile.jpg">
+                <div class="card-title">Olha que perfeito!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function soltarCoracoes() {
+            const quantidade = 25; // Quantidade de corações que vão subir
+            for (let i = 0; i < quantidade; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    
+                    // Posição horizontal aleatória
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    // Tamanho aleatório para dar profundidade
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    // Tempo de animação ligeiramente diferente
+                    heart.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+                    
+                    document.body.appendChild(heart);
+                    
+                    // Remove o elemento depois que a animação acaba
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 2000);
+                }, i * 100); // Pequeno atraso entre cada coração para efeito cascata
+            }
+        }
+    </script>
+</body>
+</html>
