@@ -47,7 +47,6 @@
         .banner {
             height: 70vh;
             position: relative;
-            /* Substitua pela foto principal de vocês */
             background: linear-gradient(to top, #141414 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.6) 100%), 
                         url('imagens/imagem_capa.jpg') no-repeat center center/cover;
             display: flex;
@@ -114,6 +113,7 @@
         .btn-like {
             background-color: rgba(109, 109, 110, 0.7);
             color: #ffffff;
+            z-index: 10;
         }
 
         .btn-like:hover {
@@ -137,17 +137,17 @@
             gap: 10px;
             overflow-x: auto;
             padding: 10px 0;
-            scrollbar-width: none; /* Esconde barra no Firefox */
+            scrollbar-width: none;
         }
 
         .cards-container::-webkit-scrollbar {
-            display: none; /* Esconde barra no Chrome/Safari */
+            display: none;
         }
 
         .card {
             min-width: 240px;
             width: 240px;
-            height: 135px; /* Proporção 16:9 de streaming */
+            height: 135px;
             background-color: #333;
             border-radius: 4px;
             position: relative;
@@ -181,23 +181,24 @@
             overflow: hidden;
         }
 
-        /* Efeito de Chuva de Corações */
+        /* CSS OBRIGATÓRIO PARA OS CORAÇÕES SUBIREM */
         .heart {
             position: fixed;
+            bottom: 0;
             color: #ff4d6d;
             font-size: 24px;
             animation: floatUp 2s linear forwards;
-            z-index: 100;
+            z-index: 9999;
             pointer-events: none;
         }
 
         @keyframes floatUp {
             0% {
-                transform: translateY(100vh) scale(0);
+                transform: translateY(0) scale(0);
                 opacity: 1;
             }
             100% {
-                transform: translateY(-10vh) scale(1.5);
+                transform: translateY(-105vh) scale(1.5);
                 opacity: 0;
             }
         }
@@ -212,12 +213,12 @@
     <div class="banner">
         <div class="banner-content">
             <div class="banner-title">O Começo de Tudo</div>
-            <div class="banner-info">99% Relevante <span>2024</span> <span>2 Temporadas</span></div>
+            <div class="banner-info">99% Relevante <span>2026</span> <span>2 Temporadas</span></div>
             <div class="banner-sinopse">
                 Uma história real sobre dois corações que se cruzaram e decidiram trilhar o mesmo caminho. Cheia de sorrisos contidos, cumplicidade e um amor que cresce a cada dia. O melhor roteiro que o destino já escreveu.
             </div>
             <div>
-                <a href="#" class="btn btn-play" onclick="alert('Próximo capítulo: Continuar te amando para sempre meu trenzão!')">▶ Assistir</a>
+                <button class="btn btn-play" onclick="ativarTelaCheia()">▶ Assistir</button>
                 <button class="btn btn-like" onclick="soltarCoracoes()">❤️ Amei</button>
             </div>
         </div>
@@ -226,29 +227,25 @@
     <div class="row">
         <div class="row-title">Minhas Escolhas para Você</div>
         <div class="cards-container">
-            <div class="card" onclick="alert('Legenda: Lembrança daquele dia incrível que rimos até a barriga doer.')">
-                <img src="imagens\20240531_115058_resized.jpg" alt="Momento 1">
+            <div class="card" onclick="alert('Lembrança desse dia incrível!')">
+                <img src="imagens/20240531_115058_resized.jpg" alt="Momento 1">
                 <div class="card-title">Aquele Primeiro Sorriso</div>
             </div>
-            <div class="card" onclick="alert('Legenda: Saber que vou estar contigo para o resto de nossas vidas me faz ser eternamente grato a Deus.')">
-                <img src="imagens\20241001_132736.jpg" alt="Momento 2">
-                <div class="card-title">O nosso lugar</div>
-            </div>
-            <div class="card" onclick="alert('Legenda: Onde o nosso mundo parou por alguns segundos.')">
-                <img src="imagens\IMG-20250523-WA0036.jpg" alt="Momento 2">
+            <div class="card" onclick="alert('Onde o nosso mundo parou por alguns segundos.')">
+                <img src="imagens/20241001_132736.jpg" alt="Momento 2">
                 <div class="card-title">Melhor Encontro</div>
             </div>
-            <div class="card" onclick="alert('Legenda: Te fazer bem e feliz é minha missão nessa terra.')">
-                <img src="imagens\20241228_122206-2.jpg" alt="Momento 2">
-                <div class="card-title">Te surpreendendo</div>
-            </div>
-            <div class="card" onclick="alert('Legenda: Companheira de todas as horas, até nos cliques distraídos.')">
-                <img src="imagens\20241002_152253.jpg" alt="Momento 3">
+            <div class="card" onclick="alert('Companheira de todas as horas, até nos cliques distraídos.')">
+                <img src="imagens/IMG-20250523-WA0036.jpg" alt="Momento 3">
                 <div class="card-title">Do Jeitinho que Eu Amo</div>
             </div>
-            <div class="card" onclick="alert('Legenda: É minha melhor companhia... e única!')">
-                <img src="imagens\IMG_20260102_210558_458.jpg" alt="Momento 3">
-                <div class="card-title">Minha musa</div>
+            <div class="card" onclick="alert('Celebrando cada segundo juntos!')">
+                <img src="imagens/20241228_122206-2.jpg" alt="Momento 4">
+                <div class="card-title">Momentos Inesquecíveis</div>
+            </div>
+            <div class="card" onclick="alert('Mais um dia especial ao seu lado.')">
+                <img src="imagens/20241002_152253.jpg" alt="Momento 5">
+                <div class="card-title">Nossa Sintonia</div>
             </div>
         </div>
     </div>
@@ -264,44 +261,65 @@
                 <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=400" alt="Futuro 2">
                 <div class="card-title">Nossa Próxima Parada</div>
             </div>
-            <div class="card" onclick="alert('Nossa história será escrita por sobre a história.')">
-                <img src="imagens\89.jpg">
-                <div class="card-title">Sonhos: temporada 1</div>
+
+            <div class="card" onclick="alert('Novas aventuras e momentos lindos esperando por nós!')">
+                <img src="imagens/IMG_20260102_210558_458.jpg" alt="Futuro 1">
+                <div class="card-title">O Que Vem Por Aí</div>
             </div>
-            <div class="card" onclick="alert('Onde haja sol ou não, o seu coração é meu lar.')">
-                <img src="imagens\neve-no-chile.jpg">
-                <div class="card-title">Eu quero, tu quer</div>
+            <div class="card" onclick="alert('Viajar e descobrir o mundo com você é meu plano favorito.')">
+                <img src="imagens/neve-no-chile.jpg" alt="Chile">
+                <div class="card-title">A Próxima Grande Viagem</div>
             </div>
-            <div class="card" onclick="alert('Quando Deus nos colocou em um só caminho, já sabia que seria amor sem fim.')">
-                <img src="imagens\Casa-estilo-americano.jpg">
-                <div class="card-title">Olha que perfeito!</div>
+            <div class="card" onclick="alert('Construindo tijolo por tijolo o nosso futuro brilhante.')">
+                <img src="imagens/Casa-estilo-americano.jpg" alt="Casa">
+                <div class="card-title">Nossa Próxima Parada</div>
+            </div>
+            <div class="card" onclick="alert('Roteiro eterno escrito com muito amor.')">
+                <img src="imagens/89.jpg" alt="Futuro 4">
+                <div class="card-title">Para Sempre Juntos</div>
             </div>
         </div>
     </div>
 
     <script>
+        function ativarTelaCheia() {
+            const elemento = document.documentElement;
+            if (elemento.requestFullscreen) {
+                elemento.requestFullscreen();
+            } else if (elemento.mozRequestFullScreen) {
+                elemento.mozRequestFullScreen();
+            } else if (elemento.webkitRequestFullscreen) {
+                elemento.webkitRequestFullscreen();
+            } else if (elemento.msRequestFullscreen) {
+                elemento.msRequestFullscreen();
+            }
+            setTimeout(() => {
+                alert('Próximo capítulo: Continuar te amando para sempre!');
+            }, 300);
+        }
+
         function soltarCoracoes() {
-            const quantidade = 25; // Quantidade de corações que vão subir
+            const quantidade = 30; 
             for (let i = 0; i < quantidade; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.classList.add('heart');
                     heart.innerHTML = '❤️';
                     
-                    // Posição horizontal aleatória
+                    // Sorteia a posição na largura da tela
                     heart.style.left = Math.random() * 100 + 'vw';
-                    // Tamanho aleatório para dar profundidade
-                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                    // Tempo de animação ligeiramente diferente
+                    // Tamanhos variados para dar um efeito lindo em 3D
+                    heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                    // Velocidades diferentes para parecer uma chuva real
                     heart.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
                     
                     document.body.appendChild(heart);
                     
-                    // Remove o elemento depois que a animação acaba
+                    // Limpa o elemento da tela após sumir no topo
                     setTimeout(() => {
                         heart.remove();
                     }, 2000);
-                }, i * 100); // Pequeno atraso entre cada coração para efeito cascata
+                }, i * 80); // Efeito cascata contínuo
             }
         }
     </script>
